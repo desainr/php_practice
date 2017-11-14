@@ -2,19 +2,24 @@
     class Connection {
 
         private $connection; 
-        private $dsn = 'sqlsrv:Server=(local) ; Database=PHPPractice;';
-        private $user = 'HMBNET\ndesai';
-        
+        private $dsn = 'sqlsrv:Server=(local); Database=PHPPractice;';
+
         public function __construct() {
-            $this->connection = new PDO($this->dsn, $this->user, '');
+            try { 
+            $this->connection = new PDO($this->dsn);
+            } catch(PDOException $e) {
+                echo $e->getMessage();
+            }
         }
 
         public function query(string $sql, array $params = null) : PDOStatement {
             if($params != null) {
-                $stmt = $this->connection->prepare($sql)->execute($params);
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute($params);
                 return $stmt;
             } else {
-                $query = $this->connection.query($sql)->execute();
+                $query = $this->connection.query($sql);
+                $query->execute();
                 return $query;
             }
         }

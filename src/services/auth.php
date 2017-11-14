@@ -2,35 +2,36 @@
 
 require_once __DIR__ . '\..\config\db.php';
 require_once __DIR__ . '\..\models\user.php';
+require_once __DIR__ . '\..\models\dbResult.php';
 
 class Auth {    
-    public static function createUser(User $user) {
+    public static function createUser(User $user) : bool {
         $connection = new Connection();
         $date = date('YMD h:i:s A');
-        $hashedPassword = hashPassword($user->getPassword());
-        $connection->query('INSERT INTO users (username, password, email, GETDATE()) VALUES (:username, :password, :email)',
-        ["email"=>$user->getEmail(), "password"=>$hashedPassword, "email"=>$user->getEmail()]);
+        $hashedPassword = password_hash($user->getPassword(), PASSWORD_BCRYPT);
+        try {
+            $insert = $connection->query('INSERT INTO users (username, password, email, create_date) VALUES (:username, :password, :email, GETDATE())',
+            ["username"=>$user->getUsername(), "password"=>$hashedPassword, "email"=>$user->getEmail()]);
+            return $insert->rowCount() > 0;
+        } catch(PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        
     }
 
-    public static function validateLogin(string $username, string $password) : bool {
+    public static function validateLogin(string $username, string $password) : DBResult {
         $connection = new Connection();
-        
+    
         if($username != null && $password != null) {
-            $hashedPassword = $connection->query('SELECT password FROM users WHERE username = :username', ["username"=>$username]);
-            if(verifyHash($password, $hashedPassword)) {
-                return true;
+            $result = $connection->query('SELECT id, username, password, create_date FROM users WHERE username = :username', ["username"=>$username]);
+            $user = $result->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($password, $user["password"])) {
+                return new DBResult(true, $user);
             } else {
-                return false;
+                return new DBResult(false, null);
             }
         }
-    }
-
-    private function hashPassword(string $password) : string {
-        return password_hash($password, PASSWORD_BCRYPT);
-    }
-
-    private function verifyHash(string $password, string $hash) : bool {
-        return password_verify($password, $hash);
     }
 }
 

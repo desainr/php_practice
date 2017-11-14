@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+    session_start();
+    if(isset($_SESSION['username'])) {
+        header('location: profile.php');
+    }
+ ?>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -9,31 +14,27 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="absolute-center jumbotron">
-                    <div class="col-sm-12 col-md-10 col-md-offset-1">
-                    <?php require_once __DIR__ . '\public\views\login.php' ?>
-                    <?php
+                <div class="absolute-center">
+                    <div class="col-sm-12 jumbotron">
+                        <?php
                             require_once __DIR__ . '\services\auth.php';
                             if(!isset($_SESSION['username'])) { 
-                                require_once 'public/views/login.php';
+                                require_once 'public/views/loginForm.php';
                             }
-                            if(isset($_POST['submitType'])) {
-                                if($_POST['submitType'] == 'login') {
-                                    $isValid = Auth::validateLogin($_POST['username'], $_POST['password']);
-                                    if($isValid) {
-                                        header('location: profile.php');
-                                    } else {
-                                        echo '<div class="alert alert-danger">Invalid username/password combination</div>';
-                                    }
+                            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                                $result = Auth::validateLogin($_POST['loginUsername'], $_POST['loginPassword']);
+                                if($result->getSuccess()) {
+                                    $_SESSION["username"] = $result->getResult()["username"];
+                                    $_SESSION["user_id"] = $result->getResult()["id"];
+                                    $_SESSION["create_date"] = $result->getResult()["create_date"];
+                                    header('location: profile.php');
                                 } else {
-                                    if($_POST['username2'] != null && ($_POST['password1'] == $_POST['confirm'])) {
-                                        $newUser = new User($_POST['username1'], $_POST['password1'], $_POST['email']);
-                                    }
+                                    echo '<div class="alert alert-danger auth-error">Invalid login</div>';
                                 }
                             }
-                         
-                    ?>
+                        ?>
                     </div>
+                    <br />
                 </div>
             </div>
         </div>
