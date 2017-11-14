@@ -2,11 +2,11 @@
     class Connection {
 
         private $connection; 
-
+        private $dsn = 'sqlsrv:Server=(local) ; Database=PHPPractice;';
+        private $user = 'HMBNET\ndesai';
+        
         public function __construct() {
-            $dsn = 'sqlsrv:Server=(local) ; Database=PHPPractice;';
-            $user = 'HMBNET\ndesai';
-            $this->connection = new PDO($dsn, $user, '');
+            $this->connection = new PDO($this->dsn, $this->user, '');
         }
 
         public function query(string $sql, array $params = null) : PDOStatement {

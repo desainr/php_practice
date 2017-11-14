@@ -9,7 +9,7 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="absolute-center">
+                <div class="absolute-center jumbotron">
                     <div class="col-sm-12 col-md-10 col-md-offset-1">
                     <?php require_once __DIR__ . '\public\views\login.php' ?>
                     <?php
