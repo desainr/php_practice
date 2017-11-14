@@ -7,7 +7,7 @@
         public function __construct(string $username, string $password, string $email) {
             $this->username = $username;
             $this->password = $password;
-            $this->email = $email;
+            $this->email = $email ?? "";
         }
 
         public function setUsername(string $username) {

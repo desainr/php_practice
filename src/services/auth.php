@@ -14,12 +14,14 @@ class Auth {
 
     public static function validateLogin(string $username, string $password) : bool {
         $connection = new Connection();
-
-        $hashedPassword = $connection->query('SELECT password FROM users WHERE username = :username', ["username"=>$username]);
-        if(verifyHash($password, $hashedPassword)) {
-            return true;
-        } else {
-            return false;
+        
+        if($username != null && $password != null) {
+            $hashedPassword = $connection->query('SELECT password FROM users WHERE username = :username', ["username"=>$username]);
+            if(verifyHash($password, $hashedPassword)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
