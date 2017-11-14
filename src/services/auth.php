@@ -13,11 +13,10 @@ class Auth {
             $insert = $connection->query('INSERT INTO users (username, password, email, create_date) VALUES (:username, :password, :email, GETDATE())',
             ["username"=>$user->getUsername(), "password"=>$hashedPassword, "email"=>$user->getEmail()]);
             return $insert->rowCount() > 0;
-        } catch(PDOException $e) {
+        } catch(Exception $e) {
             echo $e->getMessage();
             return false;
         }
-        
     }
 
     public static function validateLogin(string $username, string $password) : DBResult {
@@ -32,6 +31,18 @@ class Auth {
                 return new DBResult(false, null);
             }
         }
+    }
+
+    public static function validateUsername(string $username) : bool {
+        $connection = new Connection();
+        
+        try {
+            $result = $connection->query('SELECT COUNT(*) FROM users WHERE username = :username', ["username"=>$username]);
+            return $result->fetchColumn() == 0
+        } catch(Exception $e) {
+            echo $e->getMessage();
+            return false;
+        };
     }
 }
 

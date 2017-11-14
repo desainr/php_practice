@@ -1,30 +1,61 @@
-<?php 
+<?php
     session_start();
-    if(!isset($_SESSION['username'])) {
-        header('location: index.php');
-    }
+if (!isset($_SESSION['username'])) {
+    header('location: index.php');
+}
+    
+    require_once __DIR__ . '\.\services\posts.php';
 ?>
 <!DOCTYPE HTML>
 <html>
     <head>
         <title>Profile</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">    </head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">    
         <link rel="stylesheet" href="public/css/index.css" type="text/css" />
     </head>
     <body>
         <?php
-            include './public/components/nav.php'
+            include __DIR__.'.\public\components\nav.php'
         ?>
         <div class="container">
+            <br class="clearfix"/>
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2><?php echo $_SESSION['username'] ?></h2>
+                            <h6>Profile created: <?php echo $_SESSION['create_date']?></h6>
+                            <img src="./public/images/profile.png" id="profilePicture"/> 
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-4">
-                    <h4>Welcome <?php echo $_SESSION['username'] ?> </h4> 
-                    <h6>Today is <?php echo date('M-d-Y') ?></h6>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header"><h3>Posts</h3></div>
+                    </div>
+                    <br />
+                    <form action="profile.php" method="post">
+                        <?php echo '<input type="hidden" id="userId" value="'.$_SESSION['user_id'].'"/>'?>
+                        <div class="form-group">
+                            <textarea class="form-control" id="newPost" rows="4" cols="50" maxlength="140" name="newPost" placeholder="What's on your mind..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="pull-right">
+                                <button class="btn btn-default" id="clearPost" type="reset">Clear</button>
+                                <button class="btn btn-primary" id="createNewPost" type="button">Post</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br />
                 </div>
             </div> 
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-6" style="overflow-y:scroll; height: 200px;">
+                    
+                </div>
+            </div>
         </div>
         
         <?php include 'public/components/scripts.php' ?>        

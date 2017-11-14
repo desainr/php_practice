@@ -15,10 +15,13 @@
                     <br />
                     <?php
                         require_once __DIR__ . '\services\auth.php';
-                        if($_SERVER["REQUEST_METHOD"] == "POST") {
-                            if($_POST['signupPassword'] != null && ($_POST['signupPassword'] == $_POST['confirmPassword'])) {
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        if (!Auth::validateUsername($_POST['username'])) {
+                            echo '<div alert alert-danger>Username is already taken</div>';
+                        } else {
+                            if ($_POST['signupPassword'] != null && ($_POST['signupPassword'] == $_POST['confirmPassword'])) {
                                 $newUser = new User($_POST['signupUsername'], $_POST['signupPassword'], $_POST['signupEmail']);
-                                if(Auth::createUser($newUser)) {
+                                if (Auth::createUser($newUser)) {
                                     echo '<div alert alert-success>Account created. <a href="index.php">Login</a></div>';
                                 } else {
                                     echo '<div alert alert-danger>An internal error occurred. Try again later.</div>';
@@ -27,6 +30,7 @@
                                 echo '<div alert alert-danger>Passwords do not match.</div>';
                             }
                         }
+                    }
                     ?>
                 </div>
             </div>
