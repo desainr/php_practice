@@ -15,11 +15,12 @@
         <div class="container">
             <div class="row">
                 <div class="absolute-center">
-                    <div class="col-sm-12 jumbotron">
+                    <h1>Postr <i class="fa fa-id-badge"></i></h1>
+                    <div class="col-sm-12 card">
                         <?php
                             require_once __DIR__ . '\services\auth.php';
                             if(!isset($_SESSION['username'])) { 
-                                require_once 'public/views/loginForm.php';
+                                require_once 'public/components/loginForm.php';
                             }
                             if($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $result = Auth::validateLogin($_POST['loginUsername'], $_POST['loginPassword']);
@@ -38,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <?php include 'public/components/scripts.php' ?>        
         <script src="/public/js/index.js" type="text/javascript"></script>
     </body>
 </html>

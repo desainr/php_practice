@@ -14,10 +14,20 @@
     </head>
     <body>
         <?php
-            include './public/views/nav.php'
+            include './public/components/nav.php'
         ?>
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-4">
+                    <h4>Welcome <?php echo $_SESSION['username'] ?> </h4> 
+                    <h6>Today is <?php echo date('M-d-Y') ?></h6>
+                </div>
+            </div> 
+        </div>
+        
+        <?php include 'public/components/scripts.php' ?>        
         <script src="./public/js/profile.js"></script>
     </body>
 </html>

@@ -1,4 +1,4 @@
-<div id="signupFormContainer">
+<div class="card-body">
     <h4>Sign Up</h4>
     <form action="signup.php" method="post" id="signupForm">
         <div class="form-group">

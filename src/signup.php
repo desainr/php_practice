@@ -9,8 +9,8 @@
         <div class="container">
             <div class="row">
                 <div class="absolute-center">
-                    <div class="col-sm-12 jumbotron">
-                    <?php require_once __DIR__ . '\public\views\signupForm.php' ?>
+                    <div class="col-sm-12 card">
+                    <?php require_once __DIR__ . '\public\components\signupForm.php' ?>
                     </div>
                     <br />
                     <?php
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <?php include 'public/components/scripts.php' ?>
         <script src="/public/js/index.js" type="text/javascript"></script>
     </body>
 </html>
