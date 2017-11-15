@@ -7,12 +7,14 @@
 
         public static function createNewPost(Post $post) : bool {
             $connection = new Connection();
-            try {
-               $result = $connection->query('INSERT INTO posts (user_id, text, create_date) VALUES (:user_id, :text, GETDATE())', ["user_id"=>$post->getUser, "text"=>$text]);
-               return $result->rowCount() > 0; 
-            } catch(Exception $e) {
-                echo $e->getMessage();
-                return false;
+            if($post->getText() != null) {
+                try {
+                $result = $connection->query('INSERT INTO posts (user_id, text, create_date) VALUES (:user_id, :text, GETDATE())', ["user_id"=>$post->getUserId(), "text"=>$post->getText()]);
+                return $result->rowCount() > 0; 
+                } catch(Exception $e) {
+                    echo $e->getMessage();
+                    return false;
+                }
             }
         }
 
@@ -37,6 +39,17 @@
             } catch(Exception $e) {
                 echo $e->getMessage();
                 return false;
+            }
+        }
+
+        public static function retrievePostsByUser(int $userId) {
+            $connection = new Connection();
+            
+            try {
+                $result = $connection->query('SELECT id, text, create_date FROM posts WHERE user_id = :user_id ORDER BY id DESC', ["user_id"=>$userId]);
+                return $result->fetchAll(PDO::FETCH_ASSOC);
+            } catch(Exception $e) {
+                echo $e->getMessage();
             }
         }
     }

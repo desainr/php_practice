@@ -38,11 +38,11 @@ class Auth {
         
         try {
             $result = $connection->query('SELECT COUNT(*) FROM users WHERE username = :username', ["username"=>$username]);
-            return $result->fetchColumn() == 0
+            return $result->fetchColumn() == 0;
         } catch(Exception $e) {
             echo $e->getMessage();
             return false;
-        };
+        }
     }
 }
 

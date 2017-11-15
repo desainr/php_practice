@@ -27,7 +27,7 @@
                                 if($result->getSuccess()) {
                                     $_SESSION["username"] = $result->getResult()["username"];
                                     $_SESSION["user_id"] = $result->getResult()["id"];
-                                    $_SESSION["create_date"] = $result->getResult()["create_date"];
+                                    $_SESSION["create_date"] = substr($result->getResult()["create_date"], 0, 10);
                                     header('location: profile.php');
                                 } else {
                                     echo '<div class="alert alert-danger auth-error">Invalid login</div>';

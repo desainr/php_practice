@@ -23,6 +23,16 @@
 
 #profilePicture {
     height: 300px;
+    border-radius: 5px;
     width: auto;
 
+}
+
+#profileNewPost {
+    margin-bottom: 17%;
+}
+
+#postList {
+    overflow-y: scroll;
+    height: 300px;
 }

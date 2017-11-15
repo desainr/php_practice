@@ -1,10 +1,13 @@
 <?php
     session_start();
-if (!isset($_SESSION['username'])) {
-    header('location: index.php');
-}
-    
+    if (!isset($_SESSION['username'])) {
+        header('location: index.php');
+    }
+        
     require_once __DIR__ . '\.\services\posts.php';
+    require_once __DIR__  . '\services\posts.php';
+
+    $posts = PostService::retrievePostsByUser($_SESSION['user_id']);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -35,7 +38,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="card-header"><h3>Posts</h3></div>
                     </div>
                     <br />
-                    <form action="profile.php" method="post">
+                    <form id="profileNewPost" action="profile.php" method="post">
                         <?php echo '<input type="hidden" id="userId" value="'.$_SESSION['user_id'].'"/>'?>
                         <div class="form-group">
                             <textarea class="form-control" id="newPost" rows="4" cols="50" maxlength="140" name="newPost" placeholder="What's on your mind..."></textarea>
@@ -43,19 +46,24 @@ if (!isset($_SESSION['username'])) {
                         <div class="form-group">
                             <div class="pull-right">
                                 <button class="btn btn-default" id="clearPost" type="reset">Clear</button>
-                                <button class="btn btn-primary" id="createNewPost" type="button">Post</button>
+                                <button class="btn btn-primary" id="createNewPostBtn" type="button">Post</button>
                             </div>
                         </div>
+                        <?php 
+                            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                $newPost = new Post($_POST['text'], date('YMD h:i:s A'), $_SESSION['user_id']);
+                                PostService::createNewPost($newPost);
+                            }
+                        ?>
                     </form>
-                    <br />
+                    <div id="postList">
+                        
+                    </div>
+                </div>
+                <div class="col-2">
+
                 </div>
             </div> 
-            <div class="row">
-                <div class="col-4"></div>
-                <div class="col-6" style="overflow-y:scroll; height: 200px;">
-                    
-                </div>
-            </div>
         </div>
         
         <?php include 'public/components/scripts.php' ?>        
