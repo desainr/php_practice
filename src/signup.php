@@ -10,11 +10,11 @@
             <div class="row">
                 <div class="absolute-center">
                     <div class="col-sm-12 card">
-                    <?php require_once __DIR__ . '\public\components\signupForm.php' ?>
+                    <?php require_once __DIR__ . '\public\components\SignupForm.php' ?>
                     </div>
                     <br />
                     <?php
-                        require_once __DIR__ . '\services\auth.php';
+                        require_once __DIR__ . '\services\AuthService.php';
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         if (!Auth::validateUsername($_POST['username'])) {
                             echo '<div alert alert-danger>Username is already taken</div>';
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <?php include 'public/components/scripts.php' ?>
+        <?php include 'public/components/Scripts.php' ?>
         <script src="/public/js/index.js" type="text/javascript"></script>
     </body>
 </html>

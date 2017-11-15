@@ -1,7 +1,7 @@
 <?php
 
     require_once __DIR__ .'\..\config\db.php';
-    require_once __DIR__ .'\..\models\post.php';
+    require_once __DIR__ .'\..\models\Post.php';
 
     class PostService {
 

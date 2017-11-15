@@ -1,6 +1,6 @@
 <?php session_start(); 
     if(!isset($_SESSION['username'])) {
-        header('location: index.php');
+        header('location: Index.php');
     }
 ?>
 <!DOCTYPE HTML>
@@ -13,10 +13,10 @@
     </head>
     <body>
         <?php
-            include './public/components/nav.php'
+            include './public/components/Nav.php'
         ?>
 
-        <?php include 'public/components/scripts.php' ?>
+        <?php include 'public/components/Scripts.php' ?>
         <script src="./public/js/timeline.js"></script>
     </body>
 </html>

@@ -1,8 +1,8 @@
 <?php 
 
 require_once __DIR__ . '\..\config\db.php';
-require_once __DIR__ . '\..\models\user.php';
-require_once __DIR__ . '\..\models\dbResult.php';
+require_once __DIR__ . '\..\models\User.php';
+require_once __DIR__ . '\..\models\DbResult.php';
 
 class Auth {    
     public static function createUser(User $user) : bool {

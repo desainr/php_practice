@@ -1,11 +1,10 @@
 <?php
     session_start();
     if (!isset($_SESSION['username'])) {
-        header('location: index.php');
+        header('location: Index.php');
     }
         
-    require_once __DIR__ . '\.\services\posts.php';
-    require_once __DIR__  . '\services\posts.php';
+    require_once __DIR__ . '\.\services\PostService.php';
 
     $posts = PostService::retrievePostsByUser($_SESSION['user_id']);
 ?>
@@ -19,7 +18,7 @@
     </head>
     <body>
         <?php
-            include __DIR__.'.\public\components\nav.php'
+            include __DIR__.'.\public\components\Nav.php'
         ?>
         <div class="container">
             <br class="clearfix"/>
@@ -66,7 +65,7 @@
             </div> 
         </div>
         
-        <?php include 'public/components/scripts.php' ?>        
+        <?php include 'public/components/Scripts.php' ?>        
         <script src="./public/js/profile.js"></script>
     </body>
 </html>

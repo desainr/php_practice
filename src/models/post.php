@@ -1,5 +1,5 @@
 <?php 
-    require_once __DIR__.'/./user.php';
+    require_once __DIR__.'/./User.php';
     class Post {
         private $text;
         private $create_date; 
