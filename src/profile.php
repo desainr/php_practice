@@ -18,7 +18,7 @@
     </head>
     <body>
         <?php
-            include __DIR__.'.\public\components\Nav.php'
+            include __DIR__.'.\public\components\NavComponent.php'
         ?>
         <div class="container">
             <br class="clearfix"/>

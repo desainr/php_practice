@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="absolute-center">
                     <div class="col-sm-12 card">
-                    <?php require_once __DIR__ . '\public\components\SignupForm.php' ?>
+                    <?php require_once __DIR__ . '\public\components\SignupFormComponent.php' ?>
                     </div>
                     <br />
                     <?php

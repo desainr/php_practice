@@ -13,7 +13,7 @@
     </head>
     <body>
         <?php
-            include './public/components/Nav.php'
+            include './public/components/NavComponent.php'
         ?>
         
         <?php include 'public/components/Scripts.php' ?>       

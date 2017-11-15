@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(isset($_SESSION['username'])) {
-        header('location: profile.php');
+        header('location: Profile.php');
     }
  ?>
 <!DOCTYPE HTML>
@@ -18,9 +18,9 @@
                     <h1>Postr <i class="fa fa-id-badge"></i></h1>
                     <div class="col-sm-12 card">
                         <?php
-                            require_once __DIR__ . '\services\auth.php';
+                            require_once __DIR__ . '\services\AuthService.php';
                             if(!isset($_SESSION['username'])) { 
-                                require_once 'public/components/loginForm.php';
+                                require_once 'public/components/LoginFormComponent.php';
                             }
                             if($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $result = Auth::validateLogin($_POST['loginUsername'], $_POST['loginPassword']);
@@ -28,7 +28,7 @@
                                     $_SESSION["username"] = $result->getResult()["username"];
                                     $_SESSION["user_id"] = $result->getResult()["id"];
                                     $_SESSION["create_date"] = substr($result->getResult()["create_date"], 0, 10);
-                                    header('location: profile.php');
+                                    header('location: Profile.php');
                                 } else {
                                     echo '<div class="alert alert-danger auth-error">Invalid login</div>';
                                 }
