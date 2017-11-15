@@ -12,9 +12,7 @@
         <link rel="stylesheet" href="public/css/index.css" type="text/css" />
     </head>
     <body>
-        <?php
-            include './public/components/NavComponent.php'
-        ?>
+        <?php include './public/components/NavComponent.php'?>
 
         <?php include 'public/components/Scripts.php' ?>
         <script src="./public/js/timeline.js"></script>
