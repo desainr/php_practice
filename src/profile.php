@@ -32,15 +32,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-header"><h3>Posts</h3></div>
-                    </div>
-                    <br />
+                <div class="col-1"></div>
+                <div class="col-7">
                     <form id="profileNewPost" action="profile.php" method="post">
                         <?php echo '<input type="hidden" id="userId" value="'.$_SESSION['user_id'].'"/>'?>
                         <div class="form-group">
-                            <textarea class="form-control" id="newPost" rows="4" cols="50" maxlength="140" name="newPost" placeholder="What's on your mind..."></textarea>
+                            <textarea class="form-control" id="newPost" rows="3" cols="50" maxlength="140" name="newPost" placeholder="What's on your mind..."></textarea>
                         </div>
                         <div class="form-group">
                             <div class="pull-right">
@@ -55,16 +52,15 @@
                             }
                         ?>
                     </form>
-                    <div id="postList">
-                        
+                    <div class="card">
+                        <div class="card-header"><h3>Posts</h3></div>
                     </div>
-                </div>
-                <div class="col-2">
-
+                    <br />
+                    <div id="postList"></div>
                 </div>
             </div> 
         </div>
-        
+        <?php include 'public/components/DeleteModal.php'?>
         <?php include 'public/components/Scripts.php' ?>        
         <script src="./public/js/profile.js"></script>
     </body>

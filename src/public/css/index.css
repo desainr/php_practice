@@ -29,10 +29,18 @@
 }
 
 #profileNewPost {
-    margin-bottom: 17%;
+    margin-bottom: 10%;
 }
 
 #postList {
     overflow-y: scroll;
-    height: 300px;
+    height: 600px;
+}
+
+.delete-post, .clear-edit {
+    color: red;
+}
+
+.edit-post {
+    color: #007bff;
 }

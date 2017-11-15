@@ -22,8 +22,8 @@
             $connection = new Connection();
 
             try {
-                $result = $connection->query('UPDATE posts SET text = :text WHERE post_id = :post_id', ["text"=>$newText, "post_id"=>$postId]);
-                return $result > 0;
+                $result = $connection->query('UPDATE posts SET text = :text WHERE id = :post_id', ["text"=>$newText, "post_id"=>$postId]);
+                return $result->rowCount() > 0;
             } catch(Exception $e) {
                 echo $e->getMessage();
                 return false;
@@ -34,8 +34,8 @@
             $connection = new Connection();
 
             try {
-                $result = $connection->query('DELETE FROM posts WHERE post_id = :post_id', ["post_id"=>$postId]);
-                return $result > 0;
+                $result = $connection->query('DELETE FROM posts WHERE id = :post_id', ["post_id"=>$postId]);
+                return $result->rowCount() > 0;
             } catch(Exception $e) {
                 echo $e->getMessage();
                 return false;
